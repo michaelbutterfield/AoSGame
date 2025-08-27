@@ -1,0 +1,216 @@
+[gd_scene load_steps=2 format=3 uid="uid://bqxvn8yqxqxqx"]
+
+[ext_resource type="Script" path="res://scripts/ui/ArmyBuilderUIController.cs" id="1_army_builder"]
+
+[node name="ArmyBuilderUI" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource("1_army_builder")
+
+[node name="Background" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color(0.1, 0.1, 0.15, 1)
+
+[node name="MainContainer" type="HBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 20.0
+offset_top = 20.0
+offset_right = -20.0
+offset_bottom = -20.0
+
+[node name="LeftPanel" type="VBoxContainer" parent="MainContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.4
+
+[node name="Title" type="Label" parent="MainContainer/LeftPanel"]
+layout_mode = 2
+text = "Army Builder"
+horizontal_alignment = 1
+
+[node name="FactionSelection" type="VBoxContainer" parent="MainContainer/LeftPanel"]
+layout_mode = 2
+
+[node name="FactionLabel" type="Label" parent="MainContainer/LeftPanel/FactionSelection"]
+layout_mode = 2
+text = "Select Faction:"
+
+[node name="FactionOptionButton" type="OptionButton" parent="MainContainer/LeftPanel/FactionSelection"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="UnitSelection" type="VBoxContainer" parent="MainContainer/LeftPanel"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="UnitLabel" type="Label" parent="MainContainer/LeftPanel/UnitSelection"]
+layout_mode = 2
+text = "Available Units:"
+
+[node name="UnitList" type="ItemList" parent="MainContainer/LeftPanel/UnitSelection"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="UnitDetails" type="VBoxContainer" parent="MainContainer/LeftPanel"]
+layout_mode = 2
+
+[node name="UnitNameLabel" type="Label" parent="MainContainer/LeftPanel/UnitDetails"]
+layout_mode = 2
+text = "Unit Name"
+
+[node name="UnitStats" type="GridContainer" parent="MainContainer/LeftPanel/UnitDetails"]
+layout_mode = 2
+columns = 2
+
+[node name="PointsLabel" type="Label" parent="MainContainer/LeftPanel/UnitDetails/UnitStats"]
+layout_mode = 2
+text = "Points:"
+
+[node name="PointsValue" type="Label" parent="MainContainer/LeftPanel/UnitDetails/UnitStats"]
+layout_mode = 2
+text = "0"
+
+[node name="MoveLabel" type="Label" parent="MainContainer/LeftPanel/UnitDetails/UnitStats"]
+layout_mode = 2
+text = "Move:"
+
+[node name="MoveValue" type="Label" parent="MainContainer/LeftPanel/UnitDetails/UnitStats"]
+layout_mode = 2
+text = "0"
+
+[node name="WoundsLabel" type="Label" parent="MainContainer/LeftPanel/UnitDetails/UnitStats"]
+layout_mode = 2
+text = "Wounds:"
+
+[node name="WoundsValue" type="Label" parent="MainContainer/LeftPanel/UnitDetails/UnitStats"]
+layout_mode = 2
+text = "0"
+
+[node name="SaveLabel" type="Label" parent="MainContainer/LeftPanel/UnitDetails/UnitStats"]
+layout_mode = 2
+text = "Save:"
+
+[node name="SaveValue" type="Label" parent="MainContainer/LeftPanel/UnitDetails/UnitStats"]
+layout_mode = 2
+text = "0"
+
+[node name="BraveryLabel" type="Label" parent="MainContainer/LeftPanel/UnitDetails/UnitStats"]
+layout_mode = 2
+text = "Bravery:"
+
+[node name="BraveryValue" type="Label" parent="MainContainer/LeftPanel/UnitDetails/UnitStats"]
+layout_mode = 2
+text = "0"
+
+[node name="AddUnitButton" type="Button" parent="MainContainer/LeftPanel"]
+layout_mode = 2
+text = "Add Unit"
+
+[node name="CenterPanel" type="VBoxContainer" parent="MainContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.6
+
+[node name="ArmyTitle" type="Label" parent="MainContainer/CenterPanel"]
+layout_mode = 2
+text = "Current Army"
+horizontal_alignment = 1
+
+[node name="ArmyInfo" type="HBoxContainer" parent="MainContainer/CenterPanel"]
+layout_mode = 2
+
+[node name="PointsLabel" type="Label" parent="MainContainer/CenterPanel/ArmyInfo"]
+layout_mode = 2
+text = "Total Points:"
+
+[node name="PointsValue" type="Label" parent="MainContainer/CenterPanel/ArmyInfo"]
+layout_mode = 2
+text = "0/2000"
+
+[node name="ValidationLabel" type="Label" parent="MainContainer/CenterPanel/ArmyInfo"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Valid"
+horizontal_alignment = 2
+
+[node name="ArmyList" type="ItemList" parent="MainContainer/CenterPanel"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="ArmyActions" type="HBoxContainer" parent="MainContainer/CenterPanel"]
+layout_mode = 2
+
+[node name="RemoveUnitButton" type="Button" parent="MainContainer/CenterPanel/ArmyActions"]
+layout_mode = 2
+text = "Remove Unit"
+
+[node name="ClearArmyButton" type="Button" parent="MainContainer/CenterPanel/ArmyActions"]
+layout_mode = 2
+text = "Clear Army"
+
+[node name="SaveArmyButton" type="Button" parent="MainContainer/CenterPanel/ArmyActions"]
+layout_mode = 2
+text = "Save Army"
+
+[node name="LoadArmyButton" type="Button" parent="MainContainer/CenterPanel/ArmyActions"]
+layout_mode = 2
+text = "Load Army"
+
+[node name="RightPanel" type="VBoxContainer" parent="MainContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.3
+
+[node name="ArmyComposition" type="VBoxContainer" parent="MainContainer/RightPanel"]
+layout_mode = 2
+
+[node name="CompositionLabel" type="Label" parent="MainContainer/RightPanel/ArmyComposition"]
+layout_mode = 2
+text = "Army Composition:"
+
+[node name="LeadersLabel" type="Label" parent="MainContainer/RightPanel/ArmyComposition"]
+layout_mode = 2
+text = "Leaders: 0"
+
+[node name="BattlelineLabel" type="Label" parent="MainContainer/RightPanel/ArmyComposition"]
+layout_mode = 2
+text = "Battleline: 0"
+
+[node name="OtherLabel" type="Label" parent="MainContainer/RightPanel/ArmyComposition"]
+layout_mode = 2
+text = "Other: 0"
+
+[node name="ValidationPanel" type="VBoxContainer" parent="MainContainer/RightPanel"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="ValidationTitle" type="Label" parent="MainContainer/RightPanel/ValidationPanel"]
+layout_mode = 2
+text = "Validation:"
+
+[node name="ValidationList" type="ItemList" parent="MainContainer/RightPanel/ValidationPanel"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="ActionButtons" type="VBoxContainer" parent="MainContainer/RightPanel"]
+layout_mode = 2
+
+[node name="ValidateButton" type="Button" parent="MainContainer/RightPanel/ActionButtons"]
+layout_mode = 2
+text = "Validate Army"
+
+[node name="StartGameButton" type="Button" parent="MainContainer/RightPanel/ActionButtons"]
+layout_mode = 2
+text = "Start Game"
+
+[node name="BackButton" type="Button" parent="MainContainer/RightPanel/ActionButtons"]
+layout_mode = 2
+text = "Back to Menu"

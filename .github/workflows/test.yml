@@ -1,0 +1,186 @@
+name: Run Tests
+
+on:
+  push:
+    branches: [main, develop]
+  pull_request:
+    branches: [main]
+
+jobs:
+  test:
+    runs-on: ${{ matrix.os }}
+
+    strategy:
+      matrix:
+        os: [ubuntu-latest, windows-latest, macos-latest]
+        godot-version: [4.2.1]
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: '8.0.x'
+
+      - name: Setup Godot
+        uses: godotengine/godot-ci-action@v1
+        with:
+          godot-version: ${{ matrix.godot-version }}
+
+      - name: Install NUnit Test Adapter
+        run: dotnet tool install --global NUnit.ConsoleRunner
+
+      - name: Build project
+        run: |
+          godot --headless --export-release "Windows Desktop" ./build/AoSGame.exe
+          godot --headless --export-release "Linux/X11" ./build/AoSGame.x86_64
+          godot --headless --export-release "macOS" ./build/AoSGame.dmg
+
+      - name: Run unit tests
+        run: |
+          dotnet test tests/TestSuite.cs --logger "console;verbosity=detailed"
+
+      - name: Run integration tests
+        run: |
+          godot --headless --script tests/IntegrationTests.cs
+
+      - name: Generate test report
+        run: |
+          dotnet test tests/TestSuite.cs --logger "trx;LogFileName=test-results.trx"
+
+      - name: Upload test results
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: test-results-${{ matrix.os }}
+          path: test-results.trx
+
+      - name: Run performance tests
+        run: |
+          godot --headless --script tests/PerformanceTests.cs
+
+      - name: Check code coverage
+        run: |
+          dotnet test tests/TestSuite.cs --collect:"XPlat Code Coverage"
+
+      - name: Upload coverage reports
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: coverage-${{ matrix.os }}
+          path: TestResults/
+
+  lint:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: '8.0.x'
+
+      - name: Install StyleCop
+        run: dotnet tool install --global StyleCop.Analyzers
+
+      - name: Run code analysis
+        run: |
+          dotnet build --verbosity normal --configuration Release
+
+      - name: Check for warnings
+        run: |
+          dotnet build --verbosity normal --configuration Release | grep -i warning || true
+
+  security:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Run security scan
+        uses: github/codeql-action/init@v3
+        with:
+          languages: csharp
+
+      - name: Perform CodeQL Analysis
+        uses: github/codeql-action/analyze@v3
+
+  build:
+    runs-on: ${{ matrix.os }}
+
+    strategy:
+      matrix:
+        os: [ubuntu-latest, windows-latest, macos-latest]
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Godot
+        uses: godotengine/godot-ci-action@v1
+        with:
+          godot-version: '4.2.1'
+
+      - name: Build for Windows
+        if: matrix.os == 'windows-latest'
+        run: godot --headless --export-release "Windows Desktop" ./build/AoSGame.exe
+
+      - name: Build for Linux
+        if: matrix.os == 'ubuntu-latest'
+        run: godot --headless --export-release "Linux/X11" ./build/AoSGame.x86_64
+
+      - name: Build for macOS
+        if: matrix.os == 'macos-latest'
+        run: godot --headless --export-release "macOS" ./build/AoSGame.dmg
+
+      - name: Upload build artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: build-${{ matrix.os }}
+          path: build/
+
+  release:
+    needs: [test, lint, security, build]
+    runs-on: ubuntu-latest
+    if: github.ref == 'refs/heads/main'
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Download all build artifacts
+        uses: actions/download-artifact@v4
+
+      - name: Create release
+        uses: actions/create-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          tag_name: v${{ github.run_number }}
+          release_name: Release v${{ github.run_number }}
+          body: |
+            Automated release from CI/CD pipeline
+
+            Changes in this release:
+            - Added comprehensive test suite
+            - Added Battleplan system with 6 standard battleplans
+            - Added standardized terrain layouts
+            - Improved AI opponent system
+            - Enhanced army builder with more factions
+          draft: false
+          prerelease: false
+
+      - name: Upload release assets
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          asset_path: ./build/AoSGame.exe
+          asset_name: AoSGame-Windows.exe
+          asset_content_type: application/octet-stream

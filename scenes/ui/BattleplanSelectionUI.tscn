@@ -1,0 +1,132 @@
+[gd_scene load_steps=2 format=3 uid="uid://bqxvn8yqxqxqx"]
+
+[ext_resource type="Script" path="res://scripts/ui/BattleplanSelectionUIController.cs" id="1_battleplan_selector"]
+
+[node name="BattleplanSelectionUI" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource("1_battleplan_selector")
+
+[node name="Background" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color(0.1, 0.1, 0.15, 1)
+
+[node name="MainContainer" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 20.0
+offset_top = 20.0
+offset_right = -20.0
+offset_bottom = -20.0
+
+[node name="Title" type="Label" parent="MainContainer"]
+layout_mode = 2
+text = "Select Battleplan"
+horizontal_alignment = 1
+
+[node name="HSeparator" type="HSeparator" parent="MainContainer"]
+layout_mode = 2
+
+[node name="ContentContainer" type="HBoxContainer" parent="MainContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="BattleplanList" type="VBoxContainer" parent="MainContainer/ContentContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.4
+
+[node name="BattleplanLabel" type="Label" parent="MainContainer/ContentContainer/BattleplanList"]
+layout_mode = 2
+text = "Available Battleplans:"
+
+[node name="BattleplanOptionButton" type="OptionButton" parent="MainContainer/ContentContainer/BattleplanList"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="BattleplanDetails" type="VBoxContainer" parent="MainContainer/ContentContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.6
+
+[node name="DetailsLabel" type="Label" parent="MainContainer/ContentContainer/BattleplanDetails"]
+layout_mode = 2
+text = "Battleplan Details:"
+
+[node name="BattleplanName" type="Label" parent="MainContainer/ContentContainer/BattleplanDetails"]
+layout_mode = 2
+text = "Battleplan Name"
+
+[node name="BattleplanDescription" type="Label" parent="MainContainer/ContentContainer/BattleplanDetails"]
+layout_mode = 2
+text = "Battleplan description goes here..."
+autowrap_mode = 2
+
+[node name="VictoryConditions" type="VBoxContainer" parent="MainContainer/ContentContainer/BattleplanDetails"]
+layout_mode = 2
+
+[node name="VictoryLabel" type="Label" parent="MainContainer/ContentContainer/BattleplanDetails/VictoryConditions"]
+layout_mode = 2
+text = "Victory Conditions:"
+
+[node name="VictoryList" type="ItemList" parent="MainContainer/ContentContainer/BattleplanDetails/VictoryConditions"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="BattleplanInfo" type="GridContainer" parent="MainContainer/ContentContainer/BattleplanDetails"]
+layout_mode = 2
+columns = 2
+
+[node name="MaxTurnsLabel" type="Label" parent="MainContainer/ContentContainer/BattleplanDetails/BattleplanInfo"]
+layout_mode = 2
+text = "Max Turns:"
+
+[node name="MaxTurnsValue" type="Label" parent="MainContainer/ContentContainer/BattleplanDetails/BattleplanInfo"]
+layout_mode = 2
+text = "5"
+
+[node name="DeploymentLabel" type="Label" parent="MainContainer/ContentContainer/BattleplanDetails/BattleplanInfo"]
+layout_mode = 2
+text = "Deployment:"
+
+[node name="DeploymentValue" type="Label" parent="MainContainer/ContentContainer/BattleplanDetails/BattleplanInfo"]
+layout_mode = 2
+text = "Long Edge"
+
+[node name="ObjectivesLabel" type="Label" parent="MainContainer/ContentContainer/BattleplanDetails/BattleplanInfo"]
+layout_mode = 2
+text = "Objectives:"
+
+[node name="ObjectivesValue" type="Label" parent="MainContainer/ContentContainer/BattleplanDetails/BattleplanInfo"]
+layout_mode = 2
+text = "3"
+
+[node name="TerrainLabel" type="Label" parent="MainContainer/ContentContainer/BattleplanDetails/BattleplanInfo"]
+layout_mode = 2
+text = "Terrain:"
+
+[node name="TerrainValue" type="Label" parent="MainContainer/ContentContainer/BattleplanDetails/BattleplanInfo"]
+layout_mode = 2
+text = "Open Field"
+
+[node name="ActionButtons" type="HBoxContainer" parent="MainContainer"]
+layout_mode = 2
+
+[node name="BackButton" type="Button" parent="MainContainer/ActionButtons"]
+layout_mode = 2
+text = "Back"
+
+[node name="HSeparator2" type="HSeparator" parent="MainContainer/ActionButtons"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="SelectBattleplanButton" type="Button" parent="MainContainer/ActionButtons"]
+layout_mode = 2
+text = "Select Battleplan"

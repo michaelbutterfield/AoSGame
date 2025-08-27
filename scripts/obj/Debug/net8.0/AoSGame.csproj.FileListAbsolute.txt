@@ -1,0 +1,5 @@
+C:\Projects\AoSGame\scripts\obj\Debug\net8.0\AoSGame.GeneratedMSBuildEditorConfig.editorconfig
+C:\Projects\AoSGame\scripts\obj\Debug\net8.0\AoSGame.AssemblyInfoInputs.cache
+C:\Projects\AoSGame\scripts\obj\Debug\net8.0\AoSGame.AssemblyInfo.cs
+C:\Projects\AoSGame\scripts\obj\Debug\net8.0\AoSGame.csproj.CoreCompileInputs.cache
+C:\Projects\AoSGame\scripts\obj\Debug\net8.0\AoSGame.sourcelink.json

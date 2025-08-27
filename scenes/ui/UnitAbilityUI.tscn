@@ -1,0 +1,128 @@
+[gd_scene load_steps=2 format=3 uid="uid://bqxqxqxqxqxqx"]
+
+[ext_resource type="Script" path="res://scripts/ui/UnitAbilityUIController.cs" id="1_0xqxq"]
+
+[node name="UnitAbilityUI" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource("1_0xqxq")
+
+[node name="Background" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color(0.1, 0.1, 0.1, 0.9)
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 20.0
+offset_top = 20.0
+offset_right = -20.0
+offset_bottom = -20.0
+
+[node name="TitleLabel" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+text = "Unit Abilities"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="HSeparator" type="HSeparator" parent="VBoxContainer"]
+layout_mode = 2
+
+[node name="UnitInfoContainer" type="VBoxContainer" parent="VBoxContainer"]
+layout_mode = 2
+
+[node name="UnitNameLabel" type="Label" parent="VBoxContainer/UnitInfoContainer"]
+layout_mode = 2
+text = "Unit: [Select a Unit]"
+horizontal_alignment = 1
+
+[node name="UnitStatsLabel" type="Label" parent="VBoxContainer/UnitInfoContainer"]
+layout_mode = 2
+text = "Stats: M: 0\" | W: 0 | B: 0 | Sv: 0+"
+horizontal_alignment = 1
+
+[node name="HSeparator2" type="HSeparator" parent="VBoxContainer"]
+layout_mode = 2
+
+[node name="AbilitiesScrollContainer" type="ScrollContainer" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="AbilitiesVBox" type="VBoxContainer" parent="VBoxContainer/AbilitiesScrollContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="UnitAbilitiesLabel" type="Label" parent="VBoxContainer/AbilitiesScrollContainer/AbilitiesVBox"]
+layout_mode = 2
+text = "Unit Abilities:"
+horizontal_alignment = 1
+
+[node name="UnitAbilitiesContainer" type="VBoxContainer" parent="VBoxContainer/AbilitiesScrollContainer/AbilitiesVBox"]
+layout_mode = 2
+
+[node name="HSeparator3" type="HSeparator" parent="VBoxContainer/AbilitiesScrollContainer/AbilitiesVBox"]
+layout_mode = 2
+
+[node name="ModelAbilitiesLabel" type="Label" parent="VBoxContainer/AbilitiesScrollContainer/AbilitiesVBox"]
+layout_mode = 2
+text = "Model Abilities:"
+horizontal_alignment = 1
+
+[node name="ModelAbilitiesContainer" type="VBoxContainer" parent="VBoxContainer/AbilitiesScrollContainer/AbilitiesVBox"]
+layout_mode = 2
+
+[node name="HSeparator4" type="HSeparator" parent="VBoxContainer"]
+layout_mode = 2
+
+[node name="AbilityDetailsContainer" type="VBoxContainer" parent="VBoxContainer"]
+layout_mode = 2
+
+[node name="SelectedAbilityLabel" type="Label" parent="VBoxContainer/AbilityDetailsContainer"]
+layout_mode = 2
+text = "Selected Ability: None"
+horizontal_alignment = 1
+
+[node name="AbilityDescriptionLabel" type="Label" parent="VBoxContainer/AbilityDetailsContainer"]
+layout_mode = 2
+text = "Description: Select an ability to see details"
+horizontal_alignment = 1
+autowrap_mode = 2
+
+[node name="AbilityFlavorLabel" type="Label" parent="VBoxContainer/AbilityDetailsContainer"]
+layout_mode = 2
+text = "Flavor: "
+horizontal_alignment = 1
+autowrap_mode = 2
+
+[node name="AbilityActivationLabel" type="Label" parent="VBoxContainer/AbilityDetailsContainer"]
+layout_mode = 2
+text = "Activation: "
+horizontal_alignment = 1
+
+[node name="AbilityRangeLabel" type="Label" parent="VBoxContainer/AbilityDetailsContainer"]
+layout_mode = 2
+text = "Range: "
+horizontal_alignment = 1
+
+[node name="HSeparator5" type="HSeparator" parent="VBoxContainer"]
+layout_mode = 2
+
+[node name="ActionContainer" type="HBoxContainer" parent="VBoxContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="ActivateButton" type="Button" parent="VBoxContainer/ActionContainer"]
+layout_mode = 2
+text = "Activate Ability"
+disabled = true
+
+[node name="CloseButton" type="Button" parent="VBoxContainer/ActionContainer"]
+layout_mode = 2
+text = "Close"
